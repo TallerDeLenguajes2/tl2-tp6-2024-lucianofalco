@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\tl2-tp6-2024-lucianofalco.props" />
+</Project>

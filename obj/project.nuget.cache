@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "+dDben69LD8boJWnGthXBZLSHm9btFb+5sd9rMdmLR9Y32E4UOF6TME58/j30A0wyBdEPMrxJAnFM5SbKO4tEQ==",
+  "dgSpecHash": "Xln7NgKL6sk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\luciano\\Documents\\tallerLenguajes2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "c:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\luciano\\.nuget\\packages\\microsoft.data.sqlite\\8.0.10\\microsoft.data.sqlite.8.0.10.nupkg.sha512",
+    "C:\\Users\\luciano\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.10\\microsoft.data.sqlite.core.8.0.10.nupkg.sha512",
+    "C:\\Users\\luciano\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.6\\sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
+    "C:\\Users\\luciano\\.nuget\\packages\\sqlitepclraw.core\\2.1.6\\sqlitepclraw.core.2.1.6.nupkg.sha512",
+    "C:\\Users\\luciano\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.6\\sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",
+    "C:\\Users\\luciano\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.6\\sqlitepclraw.provider.e_sqlite3.2.1.6.nupkg.sha512",
+    "C:\\Users\\luciano\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+  ],
   "logs": []
 }
