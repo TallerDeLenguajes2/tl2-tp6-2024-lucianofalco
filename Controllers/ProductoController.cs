@@ -36,32 +36,30 @@ public class ProductoController : Controller
         return View();
     }
 
-
-
-
-    [HttpGet]
+    [HttpPost]
     public IActionResult ModificarProducto(int id , string descripcion)
     {
         var productoModificado = repoProd.ModificarProducto(id , descripcion);
         return RedirectToAction("Index");
     }
-
     [HttpGet]
-    public IActionResult EliminarProducto()
+    public IActionResult ModificarProducto(int id)
     {
-        return View();
+        var productoModificado = repoProd.ListarProductos().Find(p => p.IdProducto == id);
+        return View(productoModificado);
     }
 
     [HttpGet]
-    public IActionResult EliminarProductoPorID(int id)
+    public IActionResult EliminarProducto(int id)
+    {
+        Producto p = repoProd.ListarProductos().Find(p => p.IdProducto == id);
+        return View(p);
+    }
+
+    [HttpPost]
+    public IActionResult EliminarProductoPorId(int id)
     {
         Producto productoEliminado = repoProd.EliminarProducto(id);
         return RedirectToAction("Index") ;
     }
-
-
-
-
-
-
 }

@@ -1,0 +1,22 @@
+@model Producto
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 bg-light p-4 shadow rounded">
+            <h2 class="text-sm-start text-primary mb-4">Modifificar Producto</h2>
+
+            <form asp-controller="Producto" asp-action="ModificarProducto" method="post">
+              
+                <input type="hidden" asp-for="IdProducto" />
+                <div class="form-group mb-3">
+                    <label asp-for="Descripcion" class="form-label font-weight-bold">Descripción</label>
+                    <input asp-for="Descripcion" class="form-control" placeholder="Escribe la nueva descripción del producto">
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <input type="submit" value="Guardar" class="btn btn-primary px-4" />
+                    <a asp-action="Index" class="btn btn-secondary px-4">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>

@@ -86,7 +86,7 @@ public Producto EliminarProducto(int id)
                     var producto = new Producto();
                     producto.IdProducto = Convert.ToInt32(reader["IdProducto"]);
                     producto.Descripcion = reader["Descripcion"].ToString();
-                    producto.Precio = Convert.ToInt32(reader["Precio"]);
+                    producto.Precio = Convert.ToDouble(reader["Precio"]);
                     productos.Add(producto);
                 }
             }
