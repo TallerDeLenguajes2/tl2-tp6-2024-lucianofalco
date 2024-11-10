@@ -1,5 +1,6 @@
 @model List<Producto>
 
+<h2>Productos: </h2>
 <table class="table table-striped table-bordered table-hover">
     <thead class="thead-dark">
         <tr>
@@ -18,13 +19,13 @@
                 <td>$@p.Precio</td>
                 <td class="text-center"> 
                     <a asp-controller="Producto" asp-action="ModificarProducto" asp-route-id="@p.IdProducto" class="btn btn-outline-warning">Editar </a> 
-                    <a asp-action="Producto" asp-action="EliminarProducto" asp-route="@p.IdProducto" class="btn btn-outline-danger">Eliminar</a> 
+                    <a asp-controller="Producto" asp-action="EliminarProducto" asp-route-id="@p.IdProducto" class="btn btn-outline-danger">Eliminar</a> 
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<div class="text-center">
-    <a asp-asp-controller="Producto" asp-action="CrearProducto" class="btn btn-outline-success"> Agregar producto </a>
+<div class="text-end">
+    <a asp-controller="Producto" asp-action="AltaProducto" class="btn btn-outline-success"> Agregar producto </a>
 </div>    

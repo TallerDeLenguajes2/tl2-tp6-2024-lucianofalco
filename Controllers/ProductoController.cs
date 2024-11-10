@@ -8,7 +8,7 @@ namespace tl2_tp6_2024_lucianofalco.Controllers;
 public class ProductoController : Controller
 {
     private readonly ILogger<ProductoController> _logger;
-    private ProductoRepository repoProd ;
+    private ProductoRepository repoProd;
 
     public ProductoController(ILogger<ProductoController> logger)
     {
@@ -19,23 +19,49 @@ public class ProductoController : Controller
 
     public IActionResult Index()
     {
-        
+
         return View(repoProd.ListarProductos());
     }
-    public IActionResult ModificarProducto()
+
+    [HttpPost]
+    public IActionResult CrearProducto(Producto producto)
+    {
+        Producto p = repoProd.CrearProducto(producto);
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public IActionResult AltaProducto()
     {
         return View();
     }
 
+
+
+
+    [HttpGet]
+    public IActionResult ModificarProducto(int id , string descripcion)
+    {
+        var productoModificado = repoProd.ModificarProducto(id , descripcion);
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet]
     public IActionResult EliminarProducto()
     {
         return View();
     }
 
-    public IActionResult CrearProducto()
+    [HttpGet]
+    public IActionResult EliminarProductoPorID(int id)
     {
-        return View();
+        Producto productoEliminado = repoProd.EliminarProducto(id);
+        return RedirectToAction("Index") ;
     }
+
+
+
+
 
 
 }
