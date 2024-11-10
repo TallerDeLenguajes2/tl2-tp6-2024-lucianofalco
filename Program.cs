@@ -30,6 +30,7 @@ app.Run();
     por que cuando esta vacio el formulario se rompe
     por que hay 2 controladores por vistas. se puede resolver de otra forma ? 
     por que los metodos solamente pueden ser post y get
+    con que criterio hago los endpoints
     como implementarlo con ventanas modal
     como implementarlo con iconos
 */

@@ -1,0 +1,52 @@
+@model Presupuesto
+
+<div class="container mt-4">
+    <h2 class="text-primary">Detalles del Presupuesto</h2>
+    <h4 class="text-secondary">ID: #@Model.IdPresupuesto</h4>
+    <h5>Destinatario: <span class="fw-bold">@Model.NombreDestinatario</span></h5>
+
+    <table class="table table-striped table-bordered table-hover mt-4">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col">Producto</th>
+                <th scope="col" class="text-center">Cantidad</th>
+                <th scope="col" class="text-end">Precio Unitario</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pd in Model.Detalles)
+            {
+                <tr>
+                    <th scope="row" class="text-center">@pd.Producto.IdProducto</th>
+                    <td>@pd.Producto.Descripcion</td>
+                    <td class="text-center">@pd.Cantidad</td>
+                    <td class="text-end">$@pd.Producto.Precio.ToString()</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2" class="text-end fw-bold">Cantidad Total de Productos:</td>
+                <td colspan="2" class="text-center">@Model.CantidadProductos().ToString()</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-end fw-bold">Total sin IVA:</td>
+                <td class="text-end">$@Model.MontoPresupuesto().ToString()</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-end fw-bold">Total con IVA:</td>
+                <td class="text-end">$ @Model.MontoPresupuestoConIva().ToString()</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="d-flex justify-content-end">
+        <a asp-controller="Presupuesto" asp-action="Index" class="btn btn-secondary btn-lg mt-3"> 
+            <i class="bi bi-plus-circle"></i> Volver
+        </a>
+        <a asp-controller="Presupuesto" asp-action="AgregarProducto" class="btn btn-outline-success btn-lg mt-3"> 
+            <i class="bi bi-plus-circle"></i> Agregar Producto 
+        </a>
+    </div>
+</div>

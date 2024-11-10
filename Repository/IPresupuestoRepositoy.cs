@@ -18,7 +18,8 @@ public interface IPresupuestoRepositoy
 
     Presupuesto GetPresupuesto(int id);
 
-    PresupuestoDetalle agregarProducto(int idpre , int idpro, int cantidad);
+    PresupuestoDetalle AgregarProducto(int idpre , int idpro, int cantidad);
 
     Presupuesto EliminarPresupuesto(int id) ;
+    Presupuesto ModificarPresupuesto(int id , Presupuesto p) ; // agregado en tp 6
 }

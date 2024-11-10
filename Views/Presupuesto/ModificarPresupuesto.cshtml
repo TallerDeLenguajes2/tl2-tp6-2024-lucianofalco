@@ -1,0 +1,32 @@
+@model Presupuesto
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 bg-light p-5 shadow rounded">
+            <h2 class="text-center text-primary mb-4">Modificar Presupuesto</h2>
+
+            <form asp-controller="Presupuesto" asp-action="ModificarPresupuestoPost" method="post">
+                <input type="hidden" asp-for="IdPresupuesto" />
+
+                <div class="form-group mb-4">
+                    <label asp-for="FechaCreacion" class="form-label fw-semibold">Fecha de Creación</label>
+                    <input asp-for="FechaCreacion" class="form-control" placeholder="Escribe la nueva fecha de creación" />
+                    <span asp-validation-for="FechaCreacion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="NombreDestinatario" class="form-label fw-semibold">Nombre del Destinatario</label>
+                    <input asp-for="NombreDestinatario" class="form-control" placeholder="Escribe el nombre del destinatario" />
+                    <span asp-validation-for="NombreDestinatario" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-around mt-4">
+                    <button type="submit" class="btn btn-primary px-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Guardar cambios en el presupuesto">
+                        Guardar
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary px-5">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

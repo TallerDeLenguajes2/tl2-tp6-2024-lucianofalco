@@ -1,0 +1,28 @@
+@model Presupuesto
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 bg-light p-5 shadow rounded">
+            <h2 class="text-center text-primary mb-4">Crear Nuevo Presupuesto</h2>
+
+            <form asp-controller="Presupuesto" asp-action="CrearPresupuesto" method="post">
+                <div class="form-group mb-3">
+                    <label asp-for="FechaCreacion" class="form-label fw-bold">Fecha de Creación</label>
+                    <input asp-for="FechaCreacion" type="date" class="form-control" placeholder="Selecciona la fecha de creación">
+                    <span asp-validation-for="FechaCreacion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="NombreDestinatario" class="form-label fw-bold">Nombre del Destinatario</label>
+                    <input asp-for="NombreDestinatario" class="form-control" placeholder="Ejemplo: Juan Perez">
+                    <span asp-validation-for="NombreDestinatario" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-success me-3 px-4">Crear Presupuesto</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
