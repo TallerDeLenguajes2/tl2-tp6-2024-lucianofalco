@@ -8,32 +8,15 @@
 
 public class Presupuesto
 {
-    int idPresupuesto ; 
-    string nombreDestinario ; 
-    List<PresupuestoDetalle> detalles ;
+    public int idPresupuesto {get; set;} 
+    public Cliente cliente {get; set;}
+    public List<PresupuestoDetalle> detalles {get; set;}
     public DateTime FechaCreacion {get; set;} 
 
     public Presupuesto()
     {
         detalles = new List<PresupuestoDetalle>();
     }
-
-    public Presupuesto(string nombreDestinario, DateTime FechaCreacion , List<PresupuestoDetalle> detalles)
-    {
-        this.nombreDestinario = nombreDestinario;
-        this.FechaCreacion = FechaCreacion ; 
-        this.Detalles = detalles ; 
-    }
-    public Presupuesto(string nombreDestinario, DateTime FechaCreacion)
-    {
-        this.nombreDestinario = nombreDestinario;
-        this.FechaCreacion = FechaCreacion ; 
-    }
-
-    public int IdPresupuesto { get => idPresupuesto; set => idPresupuesto = value; }
-    public string NombreDestinatario { get => nombreDestinario; set => nombreDestinario = value; }
-    public List<PresupuestoDetalle> Detalles { get => detalles; set => detalles = value; }
-
 
     /*
     ○ Metodos

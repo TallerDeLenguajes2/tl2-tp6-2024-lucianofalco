@@ -8,9 +8,9 @@
 */
 public class Producto
 {
-    int idProducto ;
-    string descripcion ; 
-    double precio ;
+    private int idProducto ;
+    private string descripcion ; 
+    private double precio ;
 
     public Producto(){
         
