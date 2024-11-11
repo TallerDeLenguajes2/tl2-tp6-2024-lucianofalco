@@ -1,0 +1,35 @@
+
+@model int
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 bg-light p-5 shadow rounded">
+            <h2 class="text-center text-primary mb-4">Agregar Producto al Presupuesto</h2>
+
+            <form asp-controller="Presupuesto" asp-action="AgregarProductoPost" method="post">
+                <input type="hidden" name="id" value="@Model" />
+                
+                <div class="form-group mb-4">
+                    <label for="idpro" class="form-label fw-bold">Producto</label>
+                    <select name="idpro" class="form-select" required>
+                        <option value="" selected disabled>Seleccione un producto</option>
+                        @foreach (var producto in (IEnumerable<SelectListItem>)ViewData["Productos"])
+                        {
+                            <option value="@producto.Value">@producto.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="cantidad" class="form-label fw-bold">Cantidad</label>
+                    <input name="cantidad" class="form-control" type="number" required min="1" placeholder="Cantidad" />
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary px-4 me-3">Agregar Producto</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

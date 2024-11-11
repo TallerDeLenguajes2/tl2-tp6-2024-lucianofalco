@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using System.Net.Cache;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using tl2_tp6_2024_lucianofalco.Models;
 
 namespace tl2_tp6_2024_lucianofalco.Controllers;
@@ -16,12 +18,6 @@ public class PresupuestoController : Controller
         repoPresupuesto = new PresupuestosRepository();
     }
 
-    /*
-    ● En el controlador de Presupuestos: Listar, Crear, Modificar y Eliminar Presupuestos.
-        ○ Tiene que poder cargar productos a un presupuesto específico
-        ○ Tiene que poder ver un presupuesto con el listado de productos
-correspondientes.
-    */
 
     [HttpGet]
     public IActionResult Index()
@@ -62,9 +58,6 @@ correspondientes.
         var p = repoPresupuesto.EliminarPresupuesto(id);
         return RedirectToAction("Index");
     }
-    public IActionResult VerPresupuesto(int id){
-        return View();
-    }
 
     [HttpGet]
     public IActionResult VerDetalle(int id){
@@ -74,8 +67,23 @@ correspondientes.
 
     [HttpGet]
     public IActionResult AgregarProducto(int id){
-        return View();
+        ProductoRepository repoProductos = new ProductoRepository();
+        List<Producto> productos = repoProductos.ListarProductos();
+        ViewData["Productos"] = productos.Select(p => new SelectListItem
+        {
+            Value = p.IdProducto.ToString(), 
+            Text = p.Descripcion 
+        }).ToList();
+
+        return View(id);
     }
+
+    [HttpPost]
+    public IActionResult AgregarProductoPost(int id , int idpro , int cantidad){
+        var pd = repoPresupuesto.AgregarProducto(id , idpro , cantidad);
+        return RedirectToAction("Index");
+    }
+
 
     
 }

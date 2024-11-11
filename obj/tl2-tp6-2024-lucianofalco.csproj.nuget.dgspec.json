@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj": {}
+    "c:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj": {}
   },
   "projects": {
-    "C:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj": {
+    "c:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj",
+        "projectUniqueName": "c:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj",
         "projectName": "tl2-tp6-2024-lucianofalco",
-        "projectPath": "C:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj",
+        "projectPath": "c:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj",
         "packagesPath": "C:\\Users\\luciano\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\obj\\",
+        "outputPath": "c:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\luciano\\AppData\\Roaming\\NuGet\\NuGet.Config"

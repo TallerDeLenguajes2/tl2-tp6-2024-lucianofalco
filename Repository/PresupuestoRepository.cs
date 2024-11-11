@@ -11,10 +11,11 @@ public class PresupuestosRepository : IPresupuestoRepositoy
 
     public PresupuestoDetalle AgregarProducto(int idPre, int idpro, int cantidad)  // PresupuestoDetalle agregarProducto(int idpre , int idpro, int cantidad);
     {
-        PresupuestoDetalle pd = null;
+        PresupuestoDetalle pd = null ; 
         ProductoRepository productoRepository = new ProductoRepository();
         Producto producto = productoRepository.ListarProductos().Find(p => p.IdProducto == idpro);
-        if (producto != null)
+        Presupuesto presupuesto = ListarPresupuesto().Find(p => p.IdPresupuesto == idPre);
+        if (producto != null && presupuesto != null)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
