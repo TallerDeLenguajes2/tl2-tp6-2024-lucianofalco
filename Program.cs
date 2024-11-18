@@ -1,10 +1,19 @@
 var builder = WebApplication.CreateBuilder(args);
+// builder.Services.AddScoped<InMemoryUserRepository>(); -- agregar en tp8
+
+// Habilitar servicios de sesiones
+// builder.Services.AddSession(options => agregar en tp8
+// {
+//     options.IdleTimeout = TimeSpan.FromMinutes(30); // Tiempo de expiración de la sesión
+//     options.Cookie.HttpOnly = true; // Solo accesible desde HTTP, no JavaScript
+//     options.Cookie.IsEssential = true; // Necesario incluso si el usuario no acepta cookies
+// });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
+// app.UseSession(); agregar en tp8
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
