@@ -16,6 +16,7 @@ public class Presupuesto
     public Presupuesto()
     {
         detalles = new List<PresupuestoDetalle>();
+        cliente = new Cliente();
     }
 
     /*

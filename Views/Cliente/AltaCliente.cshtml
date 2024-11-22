@@ -1,0 +1,35 @@
+@model Cliente
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 bg-light p-5 shadow rounded">
+            <h2 class="text-center text-primary mb-4">Crear nuevo cliente</h2>
+
+            <form asp-controller="Cliente" asp-action="CrearCliente" method="post">
+                <div class="form-group mb-3">
+                    <label asp-for="Nombre" class="form-label fw-bold">Nombre del cliente: </label>
+                    <input asp-for="Nombre" type="text" class="form-control"
+                        placeholder="Ej:# Juan Perez">
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Telefono" class="form-label fw-bold">Telefono</label>
+                    <input asp-for="Telefono" class="form-control" placeholder="1234567890">
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Email" class="form-label fw-bold">E-mail</label>
+                    <input asp-for="Email" class="form-control" placeholder="1234567890">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div> 
+
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-success me-3 px-4">Crear Cliente</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

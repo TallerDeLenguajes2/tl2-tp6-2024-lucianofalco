@@ -78,22 +78,31 @@ public class PresupuestosRepository : IPresupuestoRepositoy
     }
 
     public Presupuesto EliminarPresupuesto(int id)
+{
+    Presupuesto presupuesto = GetPresupuesto(id);
+    if (presupuesto is not null)
     {
-        Presupuesto presupuesto = GetPresupuesto(id);
-        if (presupuesto is not null)
+        using (SqliteConnection connection = new SqliteConnection(connectionString))
         {
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-                string queryString = $"DELETE FROM Presupuestos WHERE idPresupuesto = @id ;";
-                var command = new SqliteCommand(queryString, connection);
-                command.Parameters.AddWithValue("@id", id);
-                command.ExecuteNonQuery();
-                connection.Close();
-            }
+            connection.Open();
+
+            // Elimina primero los registros relacionados
+            string deleteDetailsQuery = "DELETE FROM PresupuestosDetalle WHERE idPresupuesto = @id;";
+            var deleteDetailsCommand = new SqliteCommand(deleteDetailsQuery, connection);
+            deleteDetailsCommand.Parameters.AddWithValue("@id", id);
+            deleteDetailsCommand.ExecuteNonQuery();
+
+            // Ahora elimina el presupuesto
+            string deletePresupuestoQuery = "DELETE FROM Presupuestos WHERE idPresupuesto = @id;";
+            var deletePresupuestoCommand = new SqliteCommand(deletePresupuestoQuery, connection);
+            deletePresupuestoCommand.Parameters.AddWithValue("@id", id);
+            deletePresupuestoCommand.ExecuteNonQuery();
+
+            connection.Close();
         }
-        return presupuesto;
     }
+    return presupuesto;
+}
 
     public Presupuesto GetPresupuesto(int id)
     {
@@ -211,7 +220,6 @@ public class PresupuestosRepository : IPresupuestoRepositoy
     {
         Presupuesto presupuesto = null;
         List<Presupuesto> presupuestos = new List<Presupuesto>();
-        string connectionString = "Data Source=bd/Tienda.db;";
         using (SqliteConnection connection = new SqliteConnection(connectionString))
         {
             connection.Open();
@@ -223,8 +231,8 @@ public class PresupuestosRepository : IPresupuestoRepositoy
                 {
                     presupuesto = new Presupuesto();
                     presupuesto.idPresupuesto = Convert.ToInt32(reader["idPresupuesto"]);
-                    presupuesto.cliente.idCliente = Convert.ToInt32(reader["idCliente"]);
                     presupuesto.FechaCreacion = Convert.ToDateTime(reader["FechaCreacion"]);
+                    presupuesto.cliente.idCliente = Convert.ToInt32(reader["idCliente"]);
                     presupuestos.Add(presupuesto);
                 }
             }
@@ -234,33 +242,41 @@ public class PresupuestosRepository : IPresupuestoRepositoy
     }
 
     public Presupuesto ModificarPresupuesto(int idPresupuesto, Presupuesto p)
-    { // agregado en tp 6
-        Presupuesto presupuesto = null;
-        using (var connection = new SqliteConnection(connectionString))
-        {
-            connection.Open();
-            string querystring = "UPDATE Presupuestos SET FechaCreacion = @FechaCreacion , idCliente = @idCliente WHERE idPresupuesto = @idPresupuesto;";
-            var command = new SqliteCommand(querystring, connection);
-            command.Parameters.AddWithValue("@FechaCreacion", p.FechaCreacion.ToString("yyyy-MM-dd")); // p.FechaCreacion.ToString("yyyy-MM-dd")
-            command.Parameters.AddWithValue("@idCliente", p.cliente.idCliente);
-            command.Parameters.AddWithValue("@idPresupuesto", p.idPresupuesto);
-            command.ExecuteNonQuery();
+{
+    Presupuesto presupuesto = null;
+    using (var connection = new SqliteConnection(connectionString))
+    {
+        connection.Open();
 
-            string selecquery = "select * from presupuestos where idPresupuesto = @idPresupuesto ;";
-            var commandSelect = new SqliteCommand(selecquery, connection);
-            commandSelect.Parameters.AddWithValue("@idPresupuesto", idPresupuesto);
-            using (var reader = commandSelect.ExecuteReader())
+        // Actualizar el presupuesto
+        string querystring = "UPDATE Presupuestos SET FechaCreacion = @FechaCreacion , idCliente = @idCliente WHERE idPresupuesto = @idPresupuesto;";
+        var command = new SqliteCommand(querystring, connection);
+        command.Parameters.AddWithValue("@FechaCreacion", p.FechaCreacion.ToString("yyyy-MM-dd"));
+        command.Parameters.AddWithValue("@idCliente", p.cliente.idCliente);
+        command.Parameters.AddWithValue("@idPresupuesto", idPresupuesto);
+        command.ExecuteNonQuery();
+
+        // Seleccionar el presupuesto modificado
+        string selectquery = "SELECT * FROM Presupuestos WHERE idPresupuesto = @idPresupuesto;";
+        var commandSelect = new SqliteCommand(selectquery, connection);
+        commandSelect.Parameters.AddWithValue("@idPresupuesto", idPresupuesto); // Cambiado a idPresupuesto
+        using (var reader = commandSelect.ExecuteReader())
+        {
+            if (reader.Read())
             {
-                while (reader.Read())
+                presupuesto = new Presupuesto
                 {
-                    presupuesto = new Presupuesto();
-                    presupuesto.idPresupuesto = Convert.ToInt32(reader["idPresupuesto"]);
-                    presupuesto.FechaCreacion = Convert.ToDateTime(reader["FechaCreacion"]);
-                    presupuesto.cliente.idCliente = Convert.ToInt32(reader["NombreDestinatario"]);
-                }
+                    idPresupuesto = Convert.ToInt32(reader["idPresupuesto"]),
+                    FechaCreacion = Convert.ToDateTime(reader["FechaCreacion"]),
+                    cliente = new Cliente { idCliente = Convert.ToInt32(reader["idCliente"]) } // Crea cliente nuevo
+                };
             }
-            connection.Close();
         }
-        return presupuesto;
+
+        connection.Close();
     }
+    return presupuesto;
+}
+
+
 }

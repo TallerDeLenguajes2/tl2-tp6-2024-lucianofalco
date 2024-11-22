@@ -7,16 +7,16 @@
 
             <div class="card border-danger">
                 <div class="card-header bg-danger text-white">
-                    <p class="mb-0">Presupuesto: #@Model.IdPresupuesto</p>
+                    <p class="mb-0">Presupuesto: #@Model.idPresupuesto</p>
                 </div>
                 
                 <div class="card-body">
                     <h5 class="card-title text-muted">Fecha de Creación: @Model.FechaCreacion.ToString("dd/MM/yyyy")</h5>
-                    <p class="card-text">Nombre del destinatario: <span class="fw-bold">@Model.NombreDestinatario</span></p>
+                    @* <p class="card-text">Nombre del destinatario: <span class="fw-bold">@Model.NombreDestinatario</span></p> *@
 
                     <div class="d-flex justify-content-around mt-4">
                         <form asp-controller="Presupuesto" asp-action="EliminarPresupuestoPost" method="post" class="d-inline">
-                            <input type="hidden" name="id" value="@Model.IdPresupuesto" />
+                            <input type="hidden" name="id" value="@Model.idPresupuesto" />
                             <button type="submit" class="btn btn-danger px-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar este presupuesto permanentemente">
                                 Eliminar
                             </button>

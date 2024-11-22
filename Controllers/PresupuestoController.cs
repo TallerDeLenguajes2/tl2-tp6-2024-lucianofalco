@@ -78,12 +78,15 @@ public class PresupuestoController : Controller
         return View(id);
     }
 
+    [HttpGet]
+    public IActionResult AltaPresupuestoProducto(Producto p){
+        return View();
+    }
+
     [HttpPost]
     public IActionResult AgregarProductoPost(int id , int idpro , int cantidad){
         var pd = repoPresupuesto.AgregarProducto(id , idpro , cantidad);
         return RedirectToAction("Index");
     }
 
-
-    
 }

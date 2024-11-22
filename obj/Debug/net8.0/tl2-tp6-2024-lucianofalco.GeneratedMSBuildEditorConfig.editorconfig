@@ -18,6 +18,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = c:\Users\luciano\Documents\tallerLenguajes2\tl2-tp6-2024-lucianofalco
 build_property._RazorSourceGeneratorDebug = 
 
+[c:/Users/luciano/Documents/tallerLenguajes2/tl2-tp6-2024-lucianofalco/Views/Cliente/AltaCliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxBbHRhQ2xpZW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/luciano/Documents/tallerLenguajes2/tl2-tp6-2024-lucianofalco/Views/Cliente/EliminarCliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxFbGltaW5hckNsaWVudGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/luciano/Documents/tallerLenguajes2/tl2-tp6-2024-lucianofalco/Views/Cliente/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/luciano/Documents/tallerLenguajes2/tl2-tp6-2024-lucianofalco/Views/Cliente/ModificarCliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxNb2RpZmljYXJDbGllbnRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [c:/Users/luciano/Documents/tallerLenguajes2/tl2-tp6-2024-lucianofalco/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

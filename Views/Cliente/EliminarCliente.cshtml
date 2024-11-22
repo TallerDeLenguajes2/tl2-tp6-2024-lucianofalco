@@ -1,0 +1,26 @@
+@model Cliente
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 bg-light p-4 shadow rounded">
+            <h2 class="text-sm-start text-primary mb-4">¿Desea eliminar este cliente?</h2>
+            <div class="card">
+                <div class="card-header">
+                    <p> Cliente: @Model.idCliente</p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-text">@Model.Email</h5>
+                    <h5 class="card-title">@Model.Nombre</h5>
+                    <h5 class="card-title">@Model.Telefono</h5>
+                    
+                    <form asp-controller="Cliente" asp-action="EliminarClientePost" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.idCliente" />
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+
+                    <a asp-controller="Cliente" asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
