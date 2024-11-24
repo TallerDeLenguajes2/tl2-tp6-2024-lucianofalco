@@ -5,7 +5,7 @@
 <table class="table table-striped table-bordered table-hover shadow-sm">
     <thead class="table-dark text-uppercase">
         <tr>
-            <th scope="col">#ID</th>
+            <th scope="col" hidden>#ID</th>
             <th scope="col">Destinatario</th>
             <th scope="col">Fecha de creación</th>
             <th scope="col" class="text-center">Acciones</th>
@@ -15,8 +15,8 @@
         @foreach (var presupuesto in Model)
         {
             <tr>
-                <th scope="row" class="text-center text-primary">@presupuesto.idPresupuesto</th>
-                <td>@presupuesto.cliente.idCliente</td>
+                <th scope="row" hidden class="text-center text-primary">@presupuesto.idPresupuesto</th>
+                <td>@presupuesto.cliente.Nombre</td>
                 <td>@presupuesto.FechaCreacion.ToString("dd/MM/yyyy")</td>
                 <td class="text-center">
                     <a asp-controller="Presupuesto" asp-action="ModificarPresupuesto" asp-route-id="@presupuesto.idPresupuesto" class="btn btn-warning btn-sm mx-1">

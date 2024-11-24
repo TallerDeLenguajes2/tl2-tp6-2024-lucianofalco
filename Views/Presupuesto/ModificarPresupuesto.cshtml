@@ -1,4 +1,4 @@
-@model Presupuesto
+@model ViewAltaPresupuesto
 
 <div class="container my-5">
     <div class="row justify-content-center">
@@ -6,19 +6,26 @@
             <h2 class="text-center text-primary mb-4">Modificar Presupuesto</h2>
 
             <form asp-controller="Presupuesto" asp-action="ModificarPresupuestoPost" method="post">
-                <input type="hidden" asp-for="idPresupuesto" />
+                <input type="hidden" asp-for="idCliente" />
 
-                <div class="form-group mb-4">
-                    <label asp-for="FechaCreacion" class="form-label fw-semibold">Fecha de Creación</label>
-                    <input asp-for="FechaCreacion" class="form-control" placeholder="Escribe la nueva fecha de creación" />
-                    <span asp-validation-for="FechaCreacion" class="text-danger"></span>
+                <div class="form-group mb-3">
+                    <label for="idCliente" class="form-label">Cliente</label>
+                    <select name="idCliente" class="form-control" required>
+                        <option value="">Seleccione un cliente para asignar presupuesto</option>
+                        @foreach (var cliente in (IEnumerable<SelectListItem>)ViewData["Clientes"])
+                        {
+                            <option value="@cliente.Value">@cliente.Text</option>
+                        }
+                    </select>
+                    <span asp-validation-for="idCliente" class="text-danger"></span>
                 </div>
 
-                @* <div class="form-group mb-4"> *@
-                    @* <label asp-for="" class="form-label fw-semibold">Nombre del Destinatario</label> *@
-                    @* <input asp-for="NombreDestinatario" class="form-control" placeholder="Escribe el nombre del destinatario" /> *@
-                    @* <span asp-validation-for="NombreDestinatario" class="text-danger"></span> *@
-                @* </div> *@
+                <div class="form-group mb-4">
+                    <label asp-for="Fecha" class="form-label fw-semibold">Fecha de Creación</label>
+                    <input asp-for="Fecha" class="form-control" placeholder="Escribe la nueva fecha de creación" />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+
 
                 <div class="d-flex justify-content-around mt-4">
                     <button type="submit" class="btn btn-primary px-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Guardar cambios en el presupuesto">

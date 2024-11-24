@@ -13,12 +13,30 @@ public class Presupuesto
     public List<PresupuestoDetalle> detalles {get; set;}
     public DateTime FechaCreacion {get; set;} 
 
+    public Presupuesto(int idPresupuesto , Cliente cliente , List<PresupuestoDetalle> detalles , DateTime FechaCreacion )
+    {
+        this.idPresupuesto = idPresupuesto ; 
+        this.cliente = cliente ; 
+        this.detalles = detalles;
+        this.FechaCreacion = FechaCreacion ;
+    }
+    public Presupuesto(int idPresupuesto , Cliente cliente, DateTime FechaCreacion )
+    {
+        this.idPresupuesto = idPresupuesto ; 
+        this.cliente = cliente ; 
+        this.FechaCreacion = FechaCreacion ;
+    }
     public Presupuesto()
     {
         detalles = new List<PresupuestoDetalle>();
         cliente = new Cliente();
     }
-
+    public Presupuesto(ViewAltaPresupuesto viewAltaPresupuestoVm)
+    {
+        cliente = new Cliente();
+        cliente.idCliente = viewAltaPresupuestoVm.idCliente;
+        FechaCreacion = viewAltaPresupuestoVm.Fecha ;
+    }
     /*
     ○ Metodos
         ■ MontoPresupuesto ()

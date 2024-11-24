@@ -24,9 +24,10 @@ public class ProductoController : Controller
     }
 
     [HttpPost]
-    public IActionResult CrearProducto(Producto producto)
+    public IActionResult CrearProducto(ViewProducto productoVM)
     {
-        Producto p = repoProd.CrearProducto(producto);
+        var p = new Producto(productoVM);
+        repoProd.CrearProducto(p);
         return RedirectToAction("Index");
     }
 
@@ -37,16 +38,19 @@ public class ProductoController : Controller
     }
 
     [HttpPost]
-    public IActionResult ModificarProducto(int id , string descripcion)
+    public IActionResult ModificarProducto(int id , ViewProducto productoVM)
     {
-        var productoModificado = repoProd.ModificarProducto(id , descripcion);
+        var producto = new Producto(productoVM);
+        var productoModificado = repoProd.ModificarProducto(id , producto);
         return RedirectToAction("Index");
     }
     [HttpGet]
     public IActionResult ModificarProducto(int id)
     {
         var productoModificado = repoProd.ListarProductos().Find(p => p.IdProducto == id);
-        return View(productoModificado);
+        var productoVM = new ViewProducto(productoModificado);
+
+        return View(productoVM);
     }
 
     [HttpGet]

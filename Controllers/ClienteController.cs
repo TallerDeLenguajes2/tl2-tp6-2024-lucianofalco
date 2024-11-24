@@ -30,32 +30,38 @@ public class ClienteController : Controller
     }
 
     [HttpPost]
-    public IActionResult CrearCliente(Cliente cliente)
+    public IActionResult CrearCliente(ViewCliente cliente)
     {
-        Cliente c = repoClientes.AgregarCliente(cliente);
+        var c = new Cliente(cliente);
+        repoClientes.AgregarCliente(c);
         return RedirectToAction("Index");
     }
 
     [HttpGet]
     public IActionResult ModificarCliente(int id)
     {
-        var c = repoClientes.ListarClientes().Find(c=>c.idCliente == id) ;
-        return View(c);
+        var cliente = repoClientes.ListarClientes().Find(c => c.idCliente == id);
+        ViewCliente model = new ViewCliente(cliente);
+        return View(model);
     }
 
-        [HttpPost]
-    public IActionResult ModificarClientePost(int id , Cliente cliente){
-        var c = repoClientes.ModificarCliente(id , cliente);
+    [HttpPost]
+    public IActionResult ModificarClientePost(int id, ViewCliente clienteVM)
+    {
+        var c = new Cliente(clienteVM) ;
+        repoClientes.ModificarCliente(id, c);
         return RedirectToAction("Index");
     }
 
     [HttpGet]
-    public IActionResult EliminarCliente(int id){
+    public IActionResult EliminarCliente(int id)
+    {
         var p = repoClientes.GetCliente(id);
         return View(p);
     }
     [HttpPost]
-    public IActionResult EliminarClientePost(int id){
+    public IActionResult EliminarClientePost(int id)
+    {
         var p = repoClientes.EliminarCliente(id);
         return RedirectToAction("Index");
     }

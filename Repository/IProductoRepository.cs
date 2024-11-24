@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 public interface IProductoRepository
 {
     Producto CrearProducto(Producto p);
-    Producto ModificarProducto(int id , string nombre);
+    Producto ModificarProducto(int id , Producto producto);
     List<Producto> ListarProductos();
     Producto EliminarProducto(int id);
 

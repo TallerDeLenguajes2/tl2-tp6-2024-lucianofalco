@@ -8,5 +8,12 @@ public class Cliente
     public Cliente()
     {
     }
+    public Cliente(ViewCliente c)
+    {
+        this.Nombre = c.Nombre ; 
+        this.Telefono = c.Telefono ; 
+        this.Email = c.Email;
+        this.idCliente = c.idCliente;
+    }
 
 }

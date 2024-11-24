@@ -16,6 +16,11 @@ public class Producto
         
     }
 
+    public Producto(ViewProducto productoVM){
+        this.descripcion= productoVM.Descripcion ;
+        this.precio= productoVM.Precio ;
+    }
+
     public Producto(int idProducto, string descripcion, double precio)
     {
         this.idProducto = idProducto;

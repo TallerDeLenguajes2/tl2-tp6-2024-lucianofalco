@@ -95,16 +95,17 @@ public Producto EliminarProducto(int id)
         return productos;
     }
 
-    public Producto ModificarProducto(int id, string nombre)
+    public Producto ModificarProducto(int id, Producto p)
     {
         Producto producto = null;
         using (var connection = new SqliteConnection(connectionString))
         {
             connection.Open();
-            string querystring = "UPDATE Productos SET Descripcion = @Descripcion WHERE idProducto = @idProducto;";
+            string querystring = "UPDATE Productos SET Descripcion = @Descripcion , Precio = @Precio WHERE idProducto = @id;";
             var command = new SqliteCommand(querystring, connection);
-            command.Parameters.AddWithValue("@Descripcion", nombre);
-            command.Parameters.AddWithValue("@idProducto", id);
+            command.Parameters.AddWithValue("@Descripcion", p.Descripcion);
+            command.Parameters.AddWithValue("@Precio", p.Precio);
+            command.Parameters.AddWithValue("@id", id);
             command.ExecuteNonQuery();
 
             string selecquery = "select * from productos where idProducto = @idProducto ;";

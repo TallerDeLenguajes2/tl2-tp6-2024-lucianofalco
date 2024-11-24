@@ -27,29 +27,51 @@ public class PresupuestoController : Controller
 
     [HttpGet]
     public IActionResult AltaPresupuesto(){
+        ClienteRepository repoCliete = new ClienteRepository();
+        List<Cliente> clientes = repoCliete.ListarClientes();
+        ViewData["Clientes"] = clientes.Select(c => new SelectListItem
+        {
+            Value = c.idCliente.ToString(), 
+            Text = c.Nombre
+        }).ToList();
         return View();
     }
 
     [HttpPost]
-    public IActionResult CrearPresupuesto(Presupuesto presupuesto){
-        repoPresupuesto.CrearPresupuesto(presupuesto);
+    public IActionResult CrearPresupuesto(ViewAltaPresupuesto altaPresupuestoVM){
+        var p = new Presupuesto(altaPresupuestoVM);
+        repoPresupuesto.CrearPresupuesto(p);
         return RedirectToAction("Index");
     }
 
     [HttpGet]
     public IActionResult ModificarPresupuesto(int id){
-        var p = repoPresupuesto.GetPresupuesto(id);
-        return View(p);
+
+        ClienteRepository repoClientes = new ClienteRepository();
+        List<Cliente> Clientes = repoClientes.ListarClientes();
+        ViewData["Clientes"] =  Clientes.Select(c=> new SelectListItem
+        {
+            Value = c.idCliente.ToString(), 
+            Text = c.Nombre
+        }).ToList();
+
+        var presupuesto  = repoPresupuesto.GetPresupuesto(id);
+        var presupuestoVM = new ViewAltaPresupuesto();
+        presupuestoVM.idCliente = presupuesto.cliente.idCliente; 
+        presupuestoVM.Fecha = presupuesto.FechaCreacion;
+        return View(presupuestoVM);
     }
     
     [HttpPost]
-    public IActionResult ModificarPresupuestoPost(int id , Presupuesto p){
-        var pr = repoPresupuesto.ModificarPresupuesto(id , p);
+    public IActionResult ModificarPresupuestoPost(int id , ViewAltaPresupuesto p){
+        var presupuestoVM = new Presupuesto(p);
+        var pr = repoPresupuesto.ModificarPresupuesto(id , presupuestoVM);
         return RedirectToAction("Index");
     }
 
      [HttpGet]
     public IActionResult EliminarPresupuesto(int id){
+
         var p = repoPresupuesto.GetPresupuesto(id);
         return View(p);
     }
@@ -75,17 +97,15 @@ public class PresupuestoController : Controller
             Text = p.Descripcion 
         }).ToList();
 
-        return View(id);
-    }
+        var model = new viewAgregarProductoAlPresupuesto();
+        model.idPre = id ;
 
-    [HttpGet]
-    public IActionResult AltaPresupuestoProducto(Producto p){
-        return View();
+        return View(model);
     }
 
     [HttpPost]
-    public IActionResult AgregarProductoPost(int id , int idpro , int cantidad){
-        var pd = repoPresupuesto.AgregarProducto(id , idpro , cantidad);
+    public IActionResult AgregarProductoPost(viewAgregarProductoAlPresupuesto model){
+        var pd = repoPresupuesto.AgregarProducto(model.idPre , model.idPro , model.cantidad);
         return RedirectToAction("Index");
     }
 
