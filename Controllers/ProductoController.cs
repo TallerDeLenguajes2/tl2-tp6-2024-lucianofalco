@@ -15,7 +15,6 @@ public class ProductoController : Controller
         _logger = logger;
         repoProd = new ProductoRepository();
     }
-    //Listar, Crear, Modificar y Eliminar Productos
 
     public IActionResult Index()
     {
@@ -26,37 +25,61 @@ public class ProductoController : Controller
     [HttpPost]
     public IActionResult CrearProducto(ViewProducto productoVM)
     {
-        var p = new Producto(productoVM);
-        repoProd.CrearProducto(p);
-        return RedirectToAction("Index");
+        if (ModelState.IsValid)
+        {
+            var p = new Producto(productoVM);
+            repoProd.CrearProducto(p);
+            return RedirectToAction("Index");
+        }
+        else return View("AltaProducto", productoVM);
     }
 
     [HttpGet]
     public IActionResult AltaProducto()
     {
-        return View();
+        return View(new ViewProducto());
     }
 
     [HttpPost]
-    public IActionResult ModificarProducto(int id , ViewProducto productoVM)
+public IActionResult ModificarProducto(int id, ViewProducto productoVM)
+{
+    if (ModelState.IsValid)
     {
         var producto = new Producto(productoVM);
-        var productoModificado = repoProd.ModificarProducto(id , producto);
+        var productoModificado = repoProd.ModificarProducto(id, producto);
         return RedirectToAction("Index");
     }
-    [HttpGet]
-    public IActionResult ModificarProducto(int id)
-    {
-        var productoModificado = repoProd.ListarProductos().Find(p => p.IdProducto == id);
-        var productoVM = new ViewProducto(productoModificado);
 
-        return View(productoVM);
+    return View(productoVM);
+}
+
+[HttpGet]
+public IActionResult ModificarProducto(int id)
+{
+
+    var productoExistente = repoProd.ListarProductos().Find(p => p.IdProducto == id);
+
+    if (productoExistente == null)
+    {
+        return RedirectToAction("Index", new { error = "Producto no encontrado" });
     }
+
+    var productoVM = new ViewProducto(productoExistente);
+
+
+    return View(productoVM);
+}
+
 
     [HttpGet]
     public IActionResult EliminarProducto(int id)
     {
         Producto p = repoProd.ListarProductos().Find(p => p.IdProducto == id);
+        if (p == null)
+        {
+            return RedirectToAction("Index", new { error = "Producto no encontrado" });
+        }
+        // var productoVM = new ViewProducto(p);
         return View(p);
     }
 
@@ -64,6 +87,6 @@ public class ProductoController : Controller
     public IActionResult EliminarProductoPorId(int id)
     {
         Producto productoEliminado = repoProd.EliminarProducto(id);
-        return RedirectToAction("Index") ;
+        return RedirectToAction("Index");
     }
 }

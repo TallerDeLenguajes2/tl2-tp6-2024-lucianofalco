@@ -15,7 +15,7 @@
 
                 <div class="form-group mb-4">
                     <label asp-for="Precio" class="form-label font-weight-bold">Precio</label>
-                    <input asp-for="Precio" class="form-control" placeholder="Ej: 199.99">
+                    <input asp-for="Precio" class="form-control" placeholder="Ej: 99999.99">
                     <span asp-validation-for="Precio" class="text-danger"></span>
                 </div>
 
@@ -27,3 +27,4 @@
         </div>
     </div>
 <
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

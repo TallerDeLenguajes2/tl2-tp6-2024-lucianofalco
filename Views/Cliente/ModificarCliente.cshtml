@@ -7,7 +7,7 @@
 
             <form asp-controller="Cliente" asp-action="ModificarClientePost" method="post">
               
-                <input type="hidden" asp-for="idCliente" />
+                <input type="hidden" asp-for="IdCliente" />
                 <div class="form-group mb-3">
                     <label asp-for="Nombre" class="form-label font-weight-bold">Nombre</label>
                     <input asp-for="Nombre" class="form-control" placeholder="ej:a Juan Prez">
@@ -15,12 +15,12 @@
                 </div>
                 <div class="form-group mb-3">
                     <label asp-for="Telefono" class="form-label font-weight-bold">Telefono</label>
-                    <input asp-for="Telefono" class="form-control" placeholder="1234567890">
+                    <input asp-for="Telefono" class="form-control" placeholder="Ej: 123-456-7890">
                     <span asp-validation-for="Telefono" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">
                     <label asp-for="Email" class="form-label font-weight-bold">E-mail</label>
-                    <input asp-for="Email" class="form-control" placeholder="nombre@tumail.com">
+                    <input asp-for="Email" class="form-control" placeholder="Ej: correo@ejemplo.com">
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
@@ -30,3 +30,5 @@
             </form>
         </div>
     </div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

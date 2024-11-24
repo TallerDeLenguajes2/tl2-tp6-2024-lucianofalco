@@ -26,15 +26,19 @@ public class ClienteController : Controller
     [HttpGet]
     public IActionResult AltaCliente()
     {
-        return View();
+        return View(new ViewCliente());
     }
 
     [HttpPost]
     public IActionResult CrearCliente(ViewCliente cliente)
     {
-        var c = new Cliente(cliente);
-        repoClientes.AgregarCliente(c);
-        return RedirectToAction("Index");
+        if (ModelState.IsValid)
+        {
+            var c = new Cliente(cliente);
+            repoClientes.AgregarCliente(c);
+            return RedirectToAction("Index");
+        }
+        else return View(new ViewCliente());
     }
 
     [HttpGet]
@@ -48,15 +52,22 @@ public class ClienteController : Controller
     [HttpPost]
     public IActionResult ModificarClientePost(int id, ViewCliente clienteVM)
     {
-        var c = new Cliente(clienteVM) ;
+        if(ModelState.IsValid){
+        var c = new Cliente(clienteVM);
         repoClientes.ModificarCliente(id, c);
         return RedirectToAction("Index");
+        }
+        else return View(new ViewCliente());
     }
 
     [HttpGet]
     public IActionResult EliminarCliente(int id)
     {
         var p = repoClientes.GetCliente(id);
+        if (p == null)
+        {
+            return RedirectToAction("Index", new { error = "Producto no encontrado" });
+        }
         return View(p);
     }
     [HttpPost]

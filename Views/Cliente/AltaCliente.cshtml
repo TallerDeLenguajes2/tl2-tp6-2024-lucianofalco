@@ -15,13 +15,13 @@
 
                 <div class="form-group mb-4">
                     <label asp-for="Telefono" class="form-label fw-bold">Telefono</label>
-                    <input asp-for="Telefono" class="form-control" placeholder="1234567890">
+                    <input asp-for="Telefono" class="form-control" placeholder="Ej: 123-456-7890">
                     <span asp-validation-for="Telefono" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mb-4">
                     <label asp-for="Email" class="form-label fw-bold">E-mail</label>
-                    <input asp-for="Email" class="form-control" placeholder="1234567890">
+                    <input asp-for="Email" class="form-control" placeholder="Ej: correo@ejemplo.com">
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div> 
 
@@ -33,3 +33,5 @@
         </div>
     </div>
 </div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

@@ -13,7 +13,7 @@ public class Cliente
         this.Nombre = c.Nombre ; 
         this.Telefono = c.Telefono ; 
         this.Email = c.Email;
-        this.idCliente = c.idCliente;
+        this.idCliente = c.IdCliente;
     }
 
 }

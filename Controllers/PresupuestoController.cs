@@ -34,11 +34,13 @@ public class PresupuestoController : Controller
             Value = c.idCliente.ToString(), 
             Text = c.Nombre
         }).ToList();
+
         return View();
     }
 
     [HttpPost]
     public IActionResult CrearPresupuesto(ViewAltaPresupuesto altaPresupuestoVM){
+       
         var p = new Presupuesto(altaPresupuestoVM);
         repoPresupuesto.CrearPresupuesto(p);
         return RedirectToAction("Index");
