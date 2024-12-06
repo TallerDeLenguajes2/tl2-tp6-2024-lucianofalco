@@ -7,15 +7,15 @@
             <h2 class="text-center text-primary mb-4">Agregar Producto al Presupuesto</h2>
 
             <form asp-controller="Presupuesto" asp-action="AgregarProductoPost" method="post">
-                <input type="hidden" name="id" value="@Model" />
+                <input type="hidden" name="idPre" value="@Model.idPre" />
                 
                 <div class="form-group mb-4">
                     <label for="idpro" class="form-label fw-bold">Producto</label>
                     <select name="idpro" class="form-select" required>
                         <option value="" selected disabled>Seleccione un producto</option>
-                        @foreach (var producto in (IEnumerable<SelectListItem>)ViewData["Productos"])
+                        @foreach (var producto in Model.productos)
                         {
-                            <option value="@producto.Value">@producto.Text</option>
+                            <option value="@producto.IdProducto">@producto.Descripcion</option>
                         }
                     </select>
                 </div>

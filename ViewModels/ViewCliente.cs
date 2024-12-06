@@ -17,7 +17,7 @@ public class ViewCliente
 
     [Required(ErrorMessage = "El email es obligatorio.")]
     
-    [EmailAddress(ErrorMessage = "Debe ser un email válido.")]
+    [EmailAddress(ErrorMessage = "Debe ser un email vá lido.")]
     public string Email { get; set; }
 
     public int IdCliente { get; set; }

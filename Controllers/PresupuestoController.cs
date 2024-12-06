@@ -28,14 +28,9 @@ public class PresupuestoController : Controller
     [HttpGet]
     public IActionResult AltaPresupuesto(){
         ClienteRepository repoCliete = new ClienteRepository();
-        List<Cliente> clientes = repoCliete.ListarClientes();
-        ViewData["Clientes"] = clientes.Select(c => new SelectListItem
-        {
-            Value = c.idCliente.ToString(), 
-            Text = c.Nombre
-        }).ToList();
-
-        return View();
+        var model = new ViewAltaPresupuesto() ;
+        model.clientes = repoCliete.ListarClientes();
+        return View(model);
     }
 
     [HttpPost]
@@ -50,15 +45,9 @@ public class PresupuestoController : Controller
     public IActionResult ModificarPresupuesto(int id){
 
         ClienteRepository repoClientes = new ClienteRepository();
-        List<Cliente> Clientes = repoClientes.ListarClientes();
-        ViewData["Clientes"] =  Clientes.Select(c=> new SelectListItem
-        {
-            Value = c.idCliente.ToString(), 
-            Text = c.Nombre
-        }).ToList();
-
-        var presupuesto  = repoPresupuesto.GetPresupuesto(id);
         var presupuestoVM = new ViewAltaPresupuesto();
+        presupuestoVM.clientes = repoClientes.ListarClientes();
+        var presupuesto  = repoPresupuesto.GetPresupuesto(id);
         presupuestoVM.idCliente = presupuesto.cliente.idCliente; 
         presupuestoVM.Fecha = presupuesto.FechaCreacion;
         return View(presupuestoVM);
@@ -92,16 +81,9 @@ public class PresupuestoController : Controller
     [HttpGet]
     public IActionResult AgregarProducto(int id){
         ProductoRepository repoProductos = new ProductoRepository();
-        List<Producto> productos = repoProductos.ListarProductos();
-        ViewData["Productos"] = productos.Select(p => new SelectListItem
-        {
-            Value = p.IdProducto.ToString(), 
-            Text = p.Descripcion 
-        }).ToList();
-
         var model = new viewAgregarProductoAlPresupuesto();
+        model.productos = repoProductos.ListarProductos();
         model.idPre = id ;
-
         return View(model);
     }
 

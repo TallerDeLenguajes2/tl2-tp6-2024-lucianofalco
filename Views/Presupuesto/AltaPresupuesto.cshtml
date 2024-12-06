@@ -10,9 +10,9 @@
                     <label for="idCliente" class="form-label">Cliente</label>
                     <select name="idCliente" class="form-control" required>
                         <option value="">Seleccione un cliente</option>
-                        @foreach (var cliente in (IEnumerable<SelectListItem>)ViewData["Clientes"])
+                        @foreach (var cliente in Model.clientes)
                         {
-                            <option value="@cliente.Value">@cliente.Text</option>
+                            <option value="@cliente.idCliente">@cliente.Nombre</option>
                         }
                     </select>
                     <span asp-validation-for="idCliente" class="text-danger"></span>

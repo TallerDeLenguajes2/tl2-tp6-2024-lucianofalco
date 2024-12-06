@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "InalPF33ze+455DyTHoAo3dERp7e0xttuiAXO/IeTVUU3AHgTV/cxqojjl4Y/T/MLNYILo0zMf8a+aBCTil7vQ==",
+  "dgSpecHash": "Xln7NgKL6sk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\luciano\\Documents\\tallerLenguajes2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj",
+  "projectFilePath": "c:\\Users\\luciano\\Documents\\taller2\\tl2-tp6-2024-lucianofalco\\tl2-tp6-2024-lucianofalco.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\luciano\\.nuget\\packages\\microsoft.data.sqlite\\8.0.10\\microsoft.data.sqlite.8.0.10.nupkg.sha512",
     "C:\\Users\\luciano\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.10\\microsoft.data.sqlite.core.8.0.10.nupkg.sha512",

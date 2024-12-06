@@ -4,6 +4,11 @@ En Productos:
 ● Precio (decimal): requerido y debe ser un valor positivo.
 */
 
+
+// 3) Incorpore los ViewModels
+// c) Para Productos: Implementa validaciones en el modelo Producto para asegurar la
+// integridad de los datos y evitar la inserción de registros incompletos o incorrectos.
+
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
