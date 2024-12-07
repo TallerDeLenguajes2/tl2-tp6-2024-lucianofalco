@@ -8,18 +8,19 @@ namespace tl2_tp6_2024_lucianofalco.Controllers;
 public class ProductoController : Controller
 {
     private readonly ILogger<ProductoController> _logger;
-    private ProductoRepository repoProd;
 
-    public ProductoController(ILogger<ProductoController> logger)
+    private readonly IProductoRepository _repoProd ;
+
+    public ProductoController(ILogger<ProductoController> logger , IProductoRepository repoProd)
     {
         _logger = logger;
-        repoProd = new ProductoRepository();
+        _repoProd=repoProd;
     }
 
     public IActionResult Index()
     {
 
-        return View(repoProd.ListarProductos());
+        return View(_repoProd.ListarProductos());
     }
 
     [HttpPost]
@@ -28,7 +29,7 @@ public class ProductoController : Controller
         if (ModelState.IsValid)
         {
             var p = new Producto(productoVM);
-            repoProd.CrearProducto(p);
+            _repoProd.CrearProducto(p);
             return RedirectToAction("Index");
         }
         else return View("AltaProducto", productoVM);
@@ -46,7 +47,7 @@ public IActionResult ModificarProducto(int id, ViewProducto productoVM)
     if (ModelState.IsValid)
     {
         var producto = new Producto(productoVM);
-        var productoModificado = repoProd.ModificarProducto(id, producto);
+        var productoModificado = _repoProd.ModificarProducto(id, producto);
         return RedirectToAction("Index");
     }
 
@@ -57,7 +58,7 @@ public IActionResult ModificarProducto(int id, ViewProducto productoVM)
 public IActionResult ModificarProducto(int id)
 {
 
-    var productoExistente = repoProd.ListarProductos().Find(p => p.IdProducto == id);
+    var productoExistente = _repoProd.ListarProductos().Find(p => p.IdProducto == id);
 
     if (productoExistente == null)
     {
@@ -74,19 +75,18 @@ public IActionResult ModificarProducto(int id)
     [HttpGet]
     public IActionResult EliminarProducto(int id)
     {
-        Producto p = repoProd.ListarProductos().Find(p => p.IdProducto == id);
+        Producto p = _repoProd.ListarProductos().Find(p => p.IdProducto == id);
         if (p == null)
         {
             return RedirectToAction("Index", new { error = "Producto no encontrado" });
         }
-        // var productoVM = new ViewProducto(p);
         return View(p);
     }
 
     [HttpPost]
     public IActionResult EliminarProductoPorId(int id)
     {
-        Producto productoEliminado = repoProd.EliminarProducto(id);
+        Producto productoEliminado = _repoProd.EliminarProducto(id);
         return RedirectToAction("Index");
     }
 }

@@ -1,4 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<IClientesRpository , ClienteRepository>();
+builder.Services.AddSingleton<IPresupuestoRepositoy , PresupuestosRepository>();
+builder.Services.AddSingleton<IProductoRepository , ProductoRepository>();
 // builder.Services.AddScoped<InMemoryUserRepository>(); -- agregar en tp8
 
 // Habilitar servicios de sesiones

@@ -8,19 +8,20 @@ namespace tl2_tp6_2024_lucianofalco.Controllers;
 public class ClienteController : Controller
 {
     private readonly ILogger<ClienteController> _logger;
-    private ClienteRepository repoClientes;
+   // private ClienteRepository repoClientes;
+    private readonly IClientesRpository _repoClientes;
 
-    public ClienteController(ILogger<ClienteController> logger)
+    public ClienteController(ILogger<ClienteController> logger , IClientesRpository repoClientes)
     {
         _logger = logger;
-        repoClientes = new ClienteRepository();
+        _repoClientes = repoClientes;
     }
 
 
     [HttpGet]
     public IActionResult Index()
     {
-        return View(repoClientes.ListarClientes());
+        return View(_repoClientes.ListarClientes());
     }
 
     [HttpGet]
@@ -35,7 +36,7 @@ public class ClienteController : Controller
         if (ModelState.IsValid)
         {
             var c = new Cliente(cliente);
-            repoClientes.AgregarCliente(c);
+            _repoClientes.AgregarCliente(c);
             return RedirectToAction("Index");
         }
         else return View(new ViewCliente());
@@ -44,7 +45,7 @@ public class ClienteController : Controller
     [HttpGet]
     public IActionResult ModificarCliente(int id)
     {
-        var cliente = repoClientes.ListarClientes().Find(c => c.idCliente == id);
+        var cliente = _repoClientes.ListarClientes().Find(c => c.idCliente == id);
         ViewCliente model = new ViewCliente(cliente);
         return View(model);
     }
@@ -54,7 +55,7 @@ public class ClienteController : Controller
     {
         if(ModelState.IsValid){
         var c = new Cliente(clienteVM);
-        repoClientes.ModificarCliente(id, c);
+        _repoClientes.ModificarCliente(id, c);
         return RedirectToAction("Index");
         }
         else return View(new ViewCliente());
@@ -63,7 +64,7 @@ public class ClienteController : Controller
     [HttpGet]
     public IActionResult EliminarCliente(int id)
     {
-        var p = repoClientes.GetCliente(id);
+        var p = _repoClientes.GetCliente(id);
         if (p == null)
         {
             return RedirectToAction("Index", new { error = "Producto no encontrado" });
@@ -73,7 +74,7 @@ public class ClienteController : Controller
     [HttpPost]
     public IActionResult EliminarClientePost(int id)
     {
-        var p = repoClientes.EliminarCliente(id);
+        var p = _repoClientes.EliminarCliente(id);
         return RedirectToAction("Index");
     }
 }
