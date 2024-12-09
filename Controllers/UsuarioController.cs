@@ -27,15 +27,14 @@ public class UsuarioController : Controller
     [HttpPost]
     public IActionResult Index(ViewUser model)
     {
-        if (ModelState.IsValid)
-        {
-            var usuario =_repoUser.BuscarUsuario(model.Usuario , model.Password);
+        var usuario =_repoUser.BuscarUsuario(model.Usuario , model.Password);
+        // if (!ModelState.IsValid)
+        // {
             if (usuario is not null)
             {
-                var userVm = new ViewUser(usuario);
-                return View(userVm);
+                return View(new ViewUser(usuario));
             }
-        }
+        // }
         return RedirectToAction("Login");
     }
 
@@ -94,5 +93,11 @@ public class UsuarioController : Controller
     {
         var p = _repoUser.EliminarUsuario(id);
         return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public IActionResult Salir()
+    {
+        return RedirectToAction("Login");
     }
 }

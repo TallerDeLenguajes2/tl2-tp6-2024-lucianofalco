@@ -36,7 +36,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Usuario}/{action=Login}/{id?}");
 
 app.Run();
 
@@ -47,4 +47,5 @@ app.Run();
     con que criterio hago los endpoints
     como implementarlo con ventanas modal
     como implementarlo con iconos
+    consultar por el appseting.json en el caso del stringConnection
 */

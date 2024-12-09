@@ -1,6 +1,5 @@
 
 using Microsoft.Data.Sqlite;
-
 public class ClienteRepository : IClientesRpository
 {
     private  string connectionString;
