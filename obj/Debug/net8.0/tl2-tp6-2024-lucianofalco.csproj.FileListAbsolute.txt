@@ -112,3 +112,4 @@ C:\Users\luciano\Documents\tallerLenguajes2\tl2-tp6-2024-lucianofalco\obj\Debug\
 C:\Users\luciano\Documents\tallerLenguajes2\tl2-tp6-2024-lucianofalco\obj\Debug\net8.0\tl2-tp6-.215445A4.Up2Date
 C:\Users\luciano\Documents\tallerLenguajes2\tl2-tp6-2024-lucianofalco\obj\Debug\net8.0\tl2-tp6-2024-lucianofalco.genruntimeconfig.cache
 C:\Users\luciano\Documents\tallerLenguajes2\tl2-tp6-2024-lucianofalco\obj\Debug\net8.0\ref\tl2-tp6-2024-lucianofalco.dll
+c:\Users\luciano\Documents\taller2\tl2-tp6-2024-lucianofalco\bin\Debug\net8.0\System.Security.Permissions.dll

@@ -2,21 +2,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IClientesRpository , ClienteRepository>();
 builder.Services.AddSingleton<IPresupuestoRepositoy , PresupuestosRepository>();
 builder.Services.AddSingleton<IProductoRepository , ProductoRepository>();
-// builder.Services.AddScoped<InMemoryUserRepository>(); -- agregar en tp8
-
+builder.Services.AddSingleton<IUsarioRepository , UsuarioRepository>();
+var CadenaDeConexion = builder.Configuration.GetConnectionString("SqliteConexion")!.ToString();
+builder.Services.AddSingleton(CadenaDeConexion);
 // Habilitar servicios de sesiones
-// builder.Services.AddSession(options => agregar en tp8
-// {
-//     options.IdleTimeout = TimeSpan.FromMinutes(30); // Tiempo de expiración de la sesión
-//     options.Cookie.HttpOnly = true; // Solo accesible desde HTTP, no JavaScript
-//     options.Cookie.IsEssential = true; // Necesario incluso si el usuario no acepta cookies
-// });
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Tiempo de expiración de la sesión
+    options.Cookie.HttpOnly = true; // Solo accesible desde HTTP, no JavaScript
+    options.Cookie.IsEssential = true; // Necesario incluso si el usuario no acepta cookies
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-// app.UseSession(); agregar en tp8
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -29,7 +31,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(

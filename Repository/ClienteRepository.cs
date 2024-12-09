@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 
 public class ClienteRepository : IClientesRpository
 {
-    private string connectionString;
+    private  string connectionString;
     public ClienteRepository()
     {
         connectionString = "Data Source=bd/Tienda.db";
