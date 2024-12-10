@@ -38,6 +38,7 @@ public class UsuarioController : Controller
                 HttpContext.Session.SetString("Roll" , usuario.Roll);
                 HttpContext.Session.SetString("Nombre" , usuario.Nombre);
                 ViewData["esAdmin"] = HttpContext.Session.GetString("Roll")=="Admin";
+                ViewData["esCliente"] = HttpContext.Session.GetString("Roll")=="Cliente";
                 if (usuario.Roll == "Admin")
                 {
                     return RedirectToAction("PanelAdministracion");

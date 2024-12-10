@@ -22,20 +22,25 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Producto"
-                                asp-action="Index">Productos</a>
-                        </li>
+                         @if ((ViewData["esAdmin"] != null && (bool)ViewData["esAdmin"]) || (ViewData["esCliente"] !=
+                        null && (bool)ViewData["esCliente"]))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Producto"
+                                    asp-action="Index">Productos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Presupuesto"
+                                    asp-action="Index">Presupuesto</a>
+                            </li>
+                        }
+
                         @if (ViewData["esAdmin"] != null && (bool)ViewData["esAdmin"])
                         {
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Usuario"
                                     asp-action="PanelAdministracion">Panel Administrador</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Presupuesto"
-                                    asp-action="Index">Presupuesto</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Cliente"
@@ -46,6 +51,7 @@
                                     asp-action="Salir">Salir</a>
                             </li>
                         }
+                       
 
                     </ul>
                 </div>

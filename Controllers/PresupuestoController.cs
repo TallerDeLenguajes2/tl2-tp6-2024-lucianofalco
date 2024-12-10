@@ -28,6 +28,7 @@ public class PresupuestoController : Controller
     public IActionResult Index()
     {
         ViewData["esAdmin"] = HttpContext.Session.GetString("Roll")=="Admin";
+        ViewData["esCliente"] = HttpContext.Session.GetString("Roll")=="Cliente";
         return View(_repoPresupuesto.ListarPresupuesto());
     }
 
