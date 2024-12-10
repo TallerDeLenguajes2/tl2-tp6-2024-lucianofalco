@@ -21,6 +21,7 @@ public class ClienteController : Controller
     [HttpGet]
     public IActionResult Index()
     {
+        ViewData["EsAdmin"] = HttpContext.Session.GetString("Roll") == "Admin";
         return View(_repoClientes.ListarClientes());
     }
 

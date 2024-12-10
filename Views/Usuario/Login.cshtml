@@ -1,33 +1,4 @@
-@model ViewUser
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - tl2_tp6_2024_lucianofalco</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/tl2_tp6_2024_lucianofalco.styles.css" asp-append-version="true" />
-</head>
-
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Trabajo Practico numero
-                    6</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </nav>
-    </header>
+@model ViewLogin
     <div class="container">
         <main role="main" class="pb-3">
             <div class="container d-flex justify-content-center align-items-center">
@@ -37,16 +8,16 @@
                             <h3 class="card-title text-center text-primary mb-4">Iniciar Sesión</h3>
                             <form asp-controller="Usuario" asp-action="Index" method="post">
                                 <div class="mb-3">
-                                    <label asp-for="Usuario" class="form-label">Usuario</label>
-                                    <input asp-for="Usuario" class="form-control" placeholder="Ingresa tu usuario"
+                                    <label asp-for="username" class="form-label">Usuario</label>
+                                    <input asp-for="username" class="form-control" placeholder="Ingresa tu usuario"
                                         required>
-                                    <span asp-validation-for="Usuario" class="text-danger"></span>
+                                    <span asp-validation-for="username" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3">
-                                    <label asp-for="Password" class="form-label">Contraseña</label>
-                                    <input asp-for="Password" class="form-control" placeholder="Escribe tu contraseña"
+                                    <label asp-for="password" class="form-label">Contraseña</label>
+                                    <input asp-for="password" class="form-control" placeholder="Escribe tu contraseña"
                                         required>
-                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                    <span asp-validation-for="password" class="text-danger"></span>
                                 </div>
                                 <div class="d-flex justify-content-center mt-4">
                                     <button type="submit" class="btn btn-success me-2 px-4">Login</button>
@@ -58,16 +29,3 @@
             </div>
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - tl2_tp6_2024_lucianofalco - <a asp-area="" asp-controller="Home"
-                asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-</body>
-
-</html>

@@ -19,7 +19,7 @@ public class ProductoController : Controller
 
     public IActionResult Index()
     {
-
+        ViewData["esAdmin"] = HttpContext.Session.GetString("Roll")=="Admin";
         return View(_repoProd.ListarProductos());
     }
 

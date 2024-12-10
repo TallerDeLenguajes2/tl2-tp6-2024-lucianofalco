@@ -21,24 +21,31 @@ public class UsuarioController : Controller
     [HttpGet]
     public IActionResult Login()
     {
-        return View(new ViewUser());
+        var model = new ViewLogin();
+        model.autentificacion = HttpContext.Session.GetString("autentificacion") == "true" ;
+        return View(model);
     }
 
     [HttpPost]
-    public IActionResult Index(ViewUser model)
+    public IActionResult Index(ViewLogin model)
     {
-        var usuario =_repoUser.BuscarUsuario(model.Usuario , model.Password);
-        // if (!ModelState.IsValid)
-        // {
+        var usuario =_repoUser.BuscarUsuario(model.username , model.password);
             if (usuario is not null)
             {
+                HttpContext.Session.SetString("autentificacion" , "true");
+                HttpContext.Session.SetString("Usuario" , usuario.Usuario);
+                HttpContext.Session.SetString("Password" , usuario.Password);
+                HttpContext.Session.SetString("Roll" , usuario.Roll);
+                HttpContext.Session.SetString("Nombre" , usuario.Nombre);
+                ViewData["esAdmin"] = HttpContext.Session.GetString("Roll")=="Admin";
+                if (usuario.Roll == "Admin")
+                {
+                    return RedirectToAction("PanelAdministracion");
+                }
                 return View(new ViewUser(usuario));
             }
-        // }
         return RedirectToAction("Login");
     }
-
-
 
 
     [HttpGet]
@@ -62,6 +69,7 @@ public class UsuarioController : Controller
     [HttpGet]
     public IActionResult ModificarUser(int id)
     {
+        
         var user = _repoUser.ListarUsuarios().Find(u => u.Id == id);
         var model = new ViewUser(user);
         return View(model);
@@ -88,6 +96,11 @@ public class UsuarioController : Controller
         }
         return View(p);
     }
+    public IActionResult PanelAdministracion()
+    {
+        ViewData["esAdmin"] = HttpContext.Session.GetString("Roll") == "Admin";
+        return View(_repoUser.ListarUsuarios());
+    }
     [HttpPost]
     public IActionResult EliminarUserPost(int id)
     {
@@ -98,6 +111,7 @@ public class UsuarioController : Controller
     [HttpGet]
     public IActionResult Salir()
     {
+        HttpContext.Session.Clear();
         return RedirectToAction("Login");
     }
 }

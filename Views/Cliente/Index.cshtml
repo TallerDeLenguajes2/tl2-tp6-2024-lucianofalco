@@ -9,7 +9,10 @@
             <th scope="col">Nombre</th>
             <th scope="col">Telefono</th>
             <th scope="col">E-mail</th>
-            <th scope="col" class="text-center">Acciones</th>
+            @if ((bool)ViewData["EsAdmin"])
+            {
+                <th scope="col" class="text-center">Acciones</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -20,14 +23,19 @@
                 <td>@c.Nombre</td>
                 <td>@c.Telefono</td>
                 <td>@c.Email</td>
-                <td class="text-center">
-                    <a asp-controller="Cliente" asp-action="ModificarCliente" asp-route-id="@c.idCliente" class="btn btn-warning btn-sm mx-1">
-                        <i class="bi bi-pencil-square"></i> Editar
-                    </a>
-                    <a asp-controller="Cliente" asp-action="EliminarCliente" asp-route-id="@c.idCliente" class="btn btn-danger btn-sm mx-1">
-                        <i class="bi bi-trash"></i> Eliminar
-                    </a>
-                </td>
+                @if ((bool)ViewData["EsAdmin"])
+                {
+                    <td class="text-center">
+                        <a asp-controller="Cliente" asp-action="ModificarCliente" asp-route-id="@c.idCliente"
+                            class="btn btn-warning btn-sm mx-1">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                        <a asp-controller="Cliente" asp-action="EliminarCliente" asp-route-id="@c.idCliente"
+                            class="btn btn-danger btn-sm mx-1">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+                    </td>
+                }
             </tr>
         }
     </tbody>

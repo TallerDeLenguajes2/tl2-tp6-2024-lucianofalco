@@ -8,7 +8,11 @@
             <th scope="col" hidden>#ID</th>
             <th scope="col">Destinatario</th>
             <th scope="col">Fecha de creación</th>
+
+
             <th scope="col" class="text-center">Acciones</th>
+
+
         </tr>
     </thead>
     <tbody>
@@ -19,16 +23,23 @@
                 <td>@presupuesto.cliente.Nombre</td>
                 <td>@presupuesto.FechaCreacion.ToString("dd/MM/yyyy")</td>
                 <td class="text-center">
-                    <a asp-controller="Presupuesto" asp-action="ModificarPresupuesto" asp-route-id="@presupuesto.idPresupuesto" class="btn btn-warning btn-sm mx-1">
-                        <i class="bi bi-pencil-square"></i> Editar
-                    </a>
-                    <a asp-controller="Presupuesto" asp-action="EliminarPresupuesto" asp-route-id="@presupuesto.idPresupuesto" class="btn btn-danger btn-sm mx-1">
-                        <i class="bi bi-trash"></i> Eliminar
-                    </a>
-                    <a asp-controller="Presupuesto" asp-action="AgregarProducto" asp-route-id="@presupuesto.idPresupuesto" class="btn btn-primary btn-sm mx-1">
-                        <i class="bi bi-eye"></i> Agregar Producto
-                    </a>
-                    <a asp-controller="Presupuesto" asp-action="VerDetalle" asp-route-id="@presupuesto.idPresupuesto" class="btn btn-info btn-sm mx-1">
+                    @if ((bool)ViewData["esAdmin"])
+                    {
+                        <a asp-controller="Presupuesto" asp-action="ModificarPresupuesto"
+                            asp-route-id="@presupuesto.idPresupuesto" class="btn btn-warning btn-sm mx-1">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                        <a asp-controller="Presupuesto" asp-action="EliminarPresupuesto"
+                            asp-route-id="@presupuesto.idPresupuesto" class="btn btn-danger btn-sm mx-1">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </a>
+                        <a asp-controller="Presupuesto" asp-action="AgregarProducto" asp-route-id="@presupuesto.idPresupuesto"
+                            class="btn btn-primary btn-sm mx-1">
+                            <i class="bi bi-eye"></i> Agregar Producto
+                        </a>
+                    }
+                    <a asp-controller="Presupuesto" asp-action="VerDetalle" asp-route-id="@presupuesto.idPresupuesto"
+                        class="btn btn-info btn-sm mx-1">
                         <i class="bi bi-eye"></i> Ver detalle
                     </a>
                 </td>
@@ -36,9 +47,11 @@
         }
     </tbody>
 </table>
-
-<div class="text-end mt-3">
-    <a asp-controller="Presupuesto" asp-action="AltaPresupuesto" class="btn btn-success btn-lg">
-        <i class="bi bi-plus-circle"></i> Agregar presupuesto
-    </a>
-</div>
+@if ((bool)ViewData["esAdmin"])
+{
+    <div class="text-end mt-3">
+        <a asp-controller="Presupuesto" asp-action="AltaPresupuesto" class="btn btn-success btn-lg">
+            <i class="bi bi-plus-circle"></i> Agregar presupuesto
+        </a>
+    </div>
+}
