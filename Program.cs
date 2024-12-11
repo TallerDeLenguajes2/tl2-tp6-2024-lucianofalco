@@ -1,3 +1,20 @@
+/*
+
+
+// líneas de código a incorporar
+var CadenaDeConexion = builder.Configuration.GetConnectionString(
+"SqliteConexion")!.ToString();
+builder.Services.AddSingleton<string>(CadenaDeConexion);
+// Aquí se realiza la inyección de los repositorios
+// [...]
+//
+var app = builder.Build();
+*/
+
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IClientesRpository , ClienteRepository>();
 builder.Services.AddSingleton<IPresupuestoRepositoy , PresupuestosRepository>();
@@ -37,7 +54,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Usuario}/{action=Index}/{id?}");
-app.MapControllers(); // agrego para poder acceder a la vriable httpcontext desde layout
+app.MapControllers(); 
 app.Run();
 
 /*

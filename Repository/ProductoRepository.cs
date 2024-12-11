@@ -4,17 +4,17 @@ using Microsoft.Data.Sqlite;
 
 public class ProductoRepository : IProductoRepository
 {
-    private string connectionString;
+    private readonly string _connectionString;
 
-    public ProductoRepository()
+    public ProductoRepository(string CadenaDeConexion)
     {
-        connectionString = "Data Source=bd/Tienda.db;";
+        _connectionString = CadenaDeConexion;
     }
 
     public Producto CrearProducto(Producto p)
     {
         Producto producto = null;
-        using (SqliteConnection connection = new SqliteConnection(connectionString))
+        using (SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             string querystring = "INSERT INTO Productos (Descripcion, Precio) VALUES (@nombre, @precio);";
@@ -44,7 +44,7 @@ public Producto EliminarProducto(int id)
     Producto productoEliminado = ListarProductos().Find(p => p.IdProducto == id);
     if (productoEliminado is not null)
     {
-        using (var connection = new SqliteConnection(connectionString))
+        using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
 
@@ -73,7 +73,7 @@ public Producto EliminarProducto(int id)
     public List<Producto> ListarProductos()
     {
         List<Producto> productos = new List<Producto>();
-        using (var connection = new SqliteConnection(connectionString))
+        using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             string queryString = "Select * from productos; ";
@@ -98,7 +98,7 @@ public Producto EliminarProducto(int id)
     public Producto ModificarProducto(int id, Producto p)
     {
         Producto producto = null;
-        using (var connection = new SqliteConnection(connectionString))
+        using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             string querystring = "UPDATE Productos SET Descripcion = @Descripcion , Precio = @Precio WHERE idProducto = @id;";

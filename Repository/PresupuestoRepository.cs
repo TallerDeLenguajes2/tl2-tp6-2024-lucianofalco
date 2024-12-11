@@ -3,21 +3,21 @@ using Microsoft.Data.Sqlite;
 
 public class PresupuestosRepository : IPresupuestoRepositoy
 {
-    private string connectionString;
-    public PresupuestosRepository()
+    private readonly string _connectionString;
+    public PresupuestosRepository(string CadenaDeConexion)
     {
-        connectionString = "Data Source=bd/Tienda.db;";
+        _connectionString = CadenaDeConexion;
     }
 
     public PresupuestoDetalle AgregarProducto(int idPre, int idpro, int cantidad)
     {
         PresupuestoDetalle pd = null;
-        ProductoRepository productoRepository = new ProductoRepository();
+        ProductoRepository productoRepository = new ProductoRepository(_connectionString);
         Producto producto = productoRepository.ListarProductos().Find(p => p.IdProducto == idpro);
         Presupuesto presupuesto = ListarPresupuesto().Find(p => p.idPresupuesto == idPre);
         if (producto != null && presupuesto != null)
         {
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (SqliteConnection connection = new SqliteConnection(_connectionString))
             {
                 connection.Open();
                 string insertarPresupuestoDetalleQuery = "INSERT INTO presupuestosdetalle (idPresupuesto, idProducto , Cantidad) VALUES (@idpre , @idpro, @cant);";
@@ -65,7 +65,7 @@ public class PresupuestosRepository : IPresupuestoRepositoy
 
     public void CrearPresupuesto(Presupuesto p)
     {
-        using (SqliteConnection connection = new SqliteConnection(connectionString))
+        using (SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             string queryString = $"INSERT INTO Presupuestos (FechaCreacion , idCliente) VALUES (@Fecha , @idCliente);";
@@ -82,7 +82,7 @@ public class PresupuestosRepository : IPresupuestoRepositoy
         Presupuesto presupuesto = GetPresupuesto(id);
         if (presupuesto is not null)
         {
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            using (SqliteConnection connection = new SqliteConnection(_connectionString))
             {
                 connection.Open();
 
@@ -109,7 +109,7 @@ public class PresupuestosRepository : IPresupuestoRepositoy
         bool tieneProductos = false;
         var detalles = new List<PresupuestoDetalle>();
 
-        using (SqliteConnection connection = new SqliteConnection(connectionString))
+        using (SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
 
@@ -197,7 +197,7 @@ public class PresupuestosRepository : IPresupuestoRepositoy
         Presupuesto presupuesto = null;
         Cliente cliente = null;
         List<Presupuesto> presupuestos = new List<Presupuesto>();
-        using (SqliteConnection connection = new SqliteConnection(connectionString))
+        using (SqliteConnection connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
             string queryString = "select * from presupuestos p left join clientes c on c.idCliente = p.idCliente;";
@@ -225,7 +225,7 @@ public class PresupuestosRepository : IPresupuestoRepositoy
     public Presupuesto ModificarPresupuesto(int idPresupuesto, Presupuesto p)
     {
         Presupuesto presupuesto = null;
-        using (var connection = new SqliteConnection(connectionString))
+        using (var connection = new SqliteConnection(_connectionString))
         {
             connection.Open();
 
