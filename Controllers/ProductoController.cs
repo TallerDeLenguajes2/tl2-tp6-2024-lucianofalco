@@ -9,20 +9,27 @@ public class ProductoController : Controller
 {
     private readonly ILogger<ProductoController> _logger;
 
-    private readonly IProductoRepository _repoProd ;
+    private readonly IProductoRepository _repoProd;
 
-    public ProductoController(ILogger<ProductoController> logger , IProductoRepository repoProd)
+    public ProductoController(ILogger<ProductoController> logger, IProductoRepository repoProd)
     {
         _logger = logger;
-        _repoProd=repoProd;
+        _repoProd = repoProd;
     }
 
     public IActionResult Index()
     {
-        ViewData["esAdmin"] = HttpContext.Session.GetString("Roll")=="Admin";
-        ViewData["esCliente"] = HttpContext.Session.GetString("Roll")=="Cliente";
-        return View(_repoProd.ListarProductos());
+        ViewData["esAdmin"] = isAdmin();
+        ViewData["esCliente"] = isClient();
+        if (isAdmin() || isClient())
+        {
+            return View(_repoProd.ListarProductos());
+        }
+        else  return RedirectToAction("Salir" , "Usuario");
     }
+
+    private bool isAdmin() => HttpContext.Session.GetString("Roll") == "Admin";
+    private bool isClient() => HttpContext.Session.GetString("Roll") == "Cliente";
 
     [HttpPost]
     public IActionResult CrearProducto(ViewProducto productoVM)
@@ -43,34 +50,34 @@ public class ProductoController : Controller
     }
 
     [HttpPost]
-public IActionResult ModificarProducto(int id, ViewProducto productoVM)
-{
-    if (ModelState.IsValid)
+    public IActionResult ModificarProducto(int id, ViewProducto productoVM)
     {
-        var producto = new Producto(productoVM);
-        var productoModificado = _repoProd.ModificarProducto(id, producto);
-        return RedirectToAction("Index");
+        if (ModelState.IsValid)
+        {
+            var producto = new Producto(productoVM);
+            var productoModificado = _repoProd.ModificarProducto(id, producto);
+            return RedirectToAction("Index");
+        }
+
+        return View(productoVM);
     }
 
-    return View(productoVM);
-}
-
-[HttpGet]
-public IActionResult ModificarProducto(int id)
-{
-
-    var productoExistente = _repoProd.ListarProductos().Find(p => p.IdProducto == id);
-
-    if (productoExistente == null)
+    [HttpGet]
+    public IActionResult ModificarProducto(int id)
     {
-        return RedirectToAction("Index", new { error = "Producto no encontrado" });
+
+        var productoExistente = _repoProd.ListarProductos().Find(p => p.IdProducto == id);
+
+        if (productoExistente == null)
+        {
+            return RedirectToAction("Index", new { error = "Producto no encontrado" });
+        }
+
+        var productoVM = new ViewProducto(productoExistente);
+
+
+        return View(productoVM);
     }
-
-    var productoVM = new ViewProducto(productoExistente);
-
-
-    return View(productoVM);
-}
 
 
     [HttpGet]

@@ -19,15 +19,21 @@ public class UsuarioController : Controller
 
 
     [HttpGet]
-    public IActionResult Login()
+    public IActionResult Index() // Index
     {
         var model = new ViewLogin();
-        model.autentificacion = HttpContext.Session.GetString("autentificacion") == "true" ;
+        if (HttpContext.Session.GetString("autentificacion") == "true")
+        {
+            model.autentificacion = true ;
+            model.username = HttpContext.Session.GetString("Nombre");
+        }
+
+        
         return View(model);
     }
 
     [HttpPost]
-    public IActionResult Index(ViewLogin model)
+    public IActionResult Login(ViewLogin model)
     {
         var usuario =_repoUser.BuscarUsuario(model.username , model.password);
             if (usuario is not null)
@@ -113,6 +119,6 @@ public class UsuarioController : Controller
     public IActionResult Salir()
     {
         HttpContext.Session.Clear();
-        return RedirectToAction("Login");
+        return RedirectToAction("Index");
     }
 }

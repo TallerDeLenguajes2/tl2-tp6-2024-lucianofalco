@@ -36,7 +36,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Usuario}/{action=Login}/{id?}");
+    pattern: "{controller=Usuario}/{action=Index}/{id?}");
 app.MapControllers(); // agrego para poder acceder a la vriable httpcontext desde layout
 app.Run();
 

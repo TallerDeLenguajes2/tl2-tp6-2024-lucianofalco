@@ -1,7 +1,38 @@
-@model ViewUser
-
-<div class="text-center">
-    <h1 class="display-4">Bienvenido : @Model.Nombre</h1>
-    <p>Usuario : @Model.Usuario</p>
-    <p>Rol : @Model.Roll</p>
+@model ViewLogin
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="login-container">
+                <div class="card">
+                    <div class="card-body">
+                        @if (!Model.autentificacion)
+                        {
+                            <h3 class="card-title text-center text-primary mb-4">Iniciar Sesión</h3>
+                            <form asp-controller="Usuario" asp-action="Login" method="post">
+                                <div class="mb-3">
+                                    <label asp-for="username" class="form-label">Usuario</label>
+                                    <input asp-for="username" class="form-control" placeholder="Ingresa tu usuario"
+                                        required>
+                                    <span asp-validation-for="username" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="password" class="form-label">Contraseña</label>
+                                    <input asp-for="password" class="form-control" placeholder="Escribe tu contraseña"
+                                        required>
+                                    <span asp-validation-for="password" class="text-danger"></span>
+                                </div>
+                                <div class="d-flex justify-content-center mt-4">
+                                    <button type="submit" class="btn btn-success me-2 px-4">Login</button>
+                                </div>
+                            </form>
+                        }
+                        else {
+                        <p>Bienvenido @Model.username</p>
+                            <a asp-action="Salir"> Salir</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
